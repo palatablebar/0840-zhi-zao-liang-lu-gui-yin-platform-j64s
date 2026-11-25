@@ -29,3 +29,26 @@
   .p0840 .panel, .p0840 .metric { min-width: 0 !important; }
   .p0840 .table-wrap { max-width: 100%; overflow-x: auto; }
 }
+
+/* 规则版本 / 可发布版本 / 生产日报 */
+.p0840 .version-box { display: flex; flex-direction: column; gap: 10px; padding: 4px 2px; }
+.p0840 .rule-scope { display: flex; flex-direction: column; gap: 4px; margin: 0; }
+.p0840 .rule-scope span, .p0840 .publish-line > span { color: var(--muted); font-size: 12px; letter-spacing: .06em; }
+.p0840 .rule-scope strong { font-weight: 600; font-size: 13px; }
+.p0840 .publish-line { display: flex; align-items: center; gap: 10px; margin: 0; flex-wrap: wrap; }
+.p0840 .version-tag { font-family: var(--font-num); border: 1px solid var(--accent); color: var(--accent); padding: 2px 8px; border-radius: var(--radius); }
+.p0840 .inline-label { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 12px; }
+.p0840 .inline-label input, .p0840 .inline-label select { width: auto; padding: 6px 8px; }
+.p0840 .incomplete-box { border: 1px solid var(--danger); border-radius: var(--radius); padding: 8px 10px; display: flex; flex-direction: column; gap: 6px; }
+.p0840 .incomplete-box strong { color: var(--danger); font-size: 13px; }
+.p0840 .incomplete-box ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 3px; }
+.p0840 .version-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 5px; max-height: 170px; overflow: auto; }
+.p0840 .version-list li { display: grid; grid-template-columns: auto 1fr auto; gap: 8px; align-items: center; border: 1px solid var(--line); border-radius: var(--radius); padding: 5px 8px; font-size: 12px; }
+.p0840 .version-list li strong { font-weight: 600; }
+.p0840 .version-list li span { color: var(--muted); font-family: var(--font-num); }
+.p0840 .version-list li em { font-style: normal; font-size: 11px; padding: 1px 6px; border-radius: 2px; border: 1px solid var(--line); color: var(--muted); justify-self: end; }
+.p0840 .version-list li.ver-issued em { color: var(--accent); border-color: var(--accent); }
+.p0840 .version-list li.ver-ready em { color: #e0b341; border-color: #e0b341; }
+.p0840 .version-list li.empty { display: block; border-style: dashed; color: var(--muted); }
+.p0840 .daily-view { display: flex; flex-direction: column; gap: 8px; font-size: 13px; }
+.p0840 .daily-view .version-list li { grid-template-columns: 1fr auto; }

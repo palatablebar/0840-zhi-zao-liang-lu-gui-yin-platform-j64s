@@ -39,6 +39,44 @@
         </div>
       </div>
     </article>
+    <article class="panel" id="panel-versions">
+      <div class="panel-head"><h2>规则版本与可发布版本</h2><span class="hint" id="rule-version-badge">规则 v1</span></div>
+      <div class="version-box">
+        <p class="rule-scope"><span>规则范围</span><strong id="rule-scope">--</strong></p>
+        <p class="publish-line">
+          <span>可发布版本</span>
+          <strong id="publishable-version" class="version-tag">--</strong>
+          <em id="issued-version" class="hint">已签发：--</em>
+        </p>
+        <div id="incomplete-box" class="incomplete-box" hidden>
+          <strong>未完成原因</strong>
+          <ul id="incomplete-list"></ul>
+          <div class="review-actions">
+            <button id="resume-recalc" type="button">补齐数据后续跑</button>
+          </div>
+        </div>
+        <div class="review-actions">
+          <label class="inline-label">新规则
+            <select id="target-rule-version"></select>
+          </label>
+          <label class="inline-label"><input type="checkbox" id="simulate-interrupt"> 模拟重算中断</label>
+          <button id="recalc" type="button" disabled>按新规则重算归因</button>
+          <button id="publish-candidate" type="button" disabled>发布可发布版本</button>
+        </div>
+        <ul id="version-list" class="version-list"></ul>
+        <p class="hint" id="version-note">签发后可按规则版本重算；重复提交同一修订请求不会新增版本，已签发版本始终保留。</p>
+      </div>
+    </article>
+    <article class="panel" id="panel-daily">
+      <div class="panel-head"><h2>生产日报</h2><span class="hint">引用已签发版本</span></div>
+      <div class="review">
+        <div class="review-actions">
+          <label class="inline-label">日报日期 <input id="daily-date" type="date"></label>
+          <button id="create-daily" type="button" disabled>生成 / 查看日报</button>
+        </div>
+        <div id="daily-view" class="daily-view"><p class="empty">签发批次后生成日报；规则重算与新版本不会改变已出日报。</p></div>
+      </div>
+    </article>
   </section>
 </main>
 {% endblock %}

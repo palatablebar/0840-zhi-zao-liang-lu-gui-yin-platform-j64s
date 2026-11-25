@@ -13,6 +13,9 @@
     return data;
   }
   function setNotice(text) { $('notice').textContent = text || ''; }
+  function emitRun(run) {
+    document.dispatchEvent(new CustomEvent('yield:run', {detail: run}));
+  }
   function renderIssues(data) {
     $('issue-count').textContent = data.issues.length + ' 条';
     $('issue-list').innerHTML = data.issues.length ? data.issues.map(function (item) {
@@ -99,6 +102,7 @@
       $('hold').disabled = state.approved;
       $('download').hidden = !state.approved;
       if (state.approved) $('download').href = '/api/runs/' + run.run_id + '/evidence';
+      emitRun(run);
     } catch (error) { setNotice(error.message); }
     finally { $('run').disabled = false; }
   }
@@ -117,6 +121,7 @@
       $('hold').disabled = true;
       $('download').hidden = !state.approved;
       if (state.approved) $('download').href = '/api/runs/' + run.run_id + '/evidence';
+      emitRun(run);
     } catch (error) { setNotice(error.message); }
   }
   async function boot() {
@@ -136,8 +141,22 @@
       state.run = null; state.approved = false;
       $('sign').disabled = true; $('hold').disabled = true; $('download').hidden = true;
       $('run-status').textContent = '未执行批次'; $('revision').textContent = 'rev 0';
+      document.dispatchEvent(new CustomEvent('yield:reset'));
       loadStage('intake');
     });
   }
   document.addEventListener('DOMContentLoaded', boot);
+  document.addEventListener('yield:run', function (event) {
+    var run = event.detail;
+    if (!run || !run.run_id) return;
+    state.run = run;
+    state.approved = run.status === 'APPROVED';
+    render(run);
+    $('run-status').textContent = run.status + ' · rev ' + run.revision;
+    $('revision').textContent = 'rev ' + run.revision;
+    $('sign').disabled = run.summary.REJECT > 0 || state.approved;
+    $('hold').disabled = state.approved;
+    $('download').hidden = !state.approved;
+    if (state.approved) $('download').href = '/api/runs/' + run.run_id + '/evidence';
+  });
 })();
